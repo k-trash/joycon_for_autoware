@@ -1,0 +1,4 @@
+[0.081s] Invoking command in '/home/autoware/autoware/src/vehicle/external/can_tx/build/can_tx': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake --build /home/autoware/autoware/src/vehicle/external/can_tx/build/can_tx -- -j4 -l4
+[0.121s] No such file or directory
+[0.121s] CMake Error: Generator: execution of make failed. Make command was: /usr/bin/gmake -j4 -l4 && 
+[0.125s] Invoked command in '/home/autoware/autoware/src/vehicle/external/can_tx/build/can_tx' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake --build /home/autoware/autoware/src/vehicle/external/can_tx/build/can_tx -- -j4 -l4

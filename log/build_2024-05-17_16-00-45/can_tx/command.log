@@ -1,0 +1,2 @@
+Invoking command in '/home/autoware/autoware/src/vehicle/external/can_tx/build/can_tx': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake --build /home/autoware/autoware/src/vehicle/external/can_tx/build/can_tx -- -j4 -l4
+Invoked command in '/home/autoware/autoware/src/vehicle/external/can_tx/build/can_tx' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake --build /home/autoware/autoware/src/vehicle/external/can_tx/build/can_tx -- -j4 -l4

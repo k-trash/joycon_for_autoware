@@ -3,6 +3,8 @@
 #include <autoware_auto_control_msgs/msg/ackermann_control_command.hpp>
 #include <tier4_vehicle_msgs/msg/actuation_command_stamped.hpp>
 #include <cmath>
+#include <iomanip>
+#include <sstream>
 
 class JoyConController : public rclcpp::Node
 {
@@ -27,6 +29,10 @@ private:
 
     brake = std::max(0.0f, std::min(1.0f, brake));
     target_steering_angle = std::max(-1.0f, std::min(1.0f, target_steering_angle));
+
+    // 小数点以下2位までに切り捨て
+    brake = std::floor(brake * 100) / 100.0;
+    target_steering_angle = std::floor(target_steering_angle * 100) / 100.0;
   }
 
   void updateSteering()
@@ -34,6 +40,9 @@ private:
     // Smoothly interpolate towards the target steering angle
     float steering_speed = 0.1; // Adjust this value to control the speed of steering changes
     steering_angle += (target_steering_angle - steering_angle) * steering_speed;
+
+    // 小数点以下2位までに切り捨て
+    steering_angle = std::floor(steering_angle * 100) / 100.0;
 
     auto control_msg = autoware_auto_control_msgs::msg::AckermannControlCommand();
     control_msg.lateral.steering_tire_angle = steering_angle;
@@ -44,7 +53,7 @@ private:
     control_cmd_pub_->publish(control_msg);
     actuation_cmd_pub_->publish(actuation_msg);
 
-    RCLCPP_INFO(this->get_logger(), "Brake: %.2f, Steering Angle: %.2f", brake, steering_angle);
+    RCLCPP_INFO(this->get_logger(), "Brake: %f, Steering Angle: %f", brake, steering_angle);
   }
 
   rclcpp::Publisher<autoware_auto_control_msgs::msg::AckermannControlCommand>::SharedPtr control_cmd_pub_;

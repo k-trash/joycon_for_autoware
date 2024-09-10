@@ -25,10 +25,11 @@ private:
   void joyCallback(const sensor_msgs::msg::Joy::SharedPtr msg)
   {
     // Assuming axes[1] is for brake and axes[0] is for steering
-    brake = msg->axes[2];
-    throttle = msg->axes[4];
+    brake = msg->axes[4];
+    throttle = msg->axes[3];
     target_steering_angle = -msg->axes[0];
 
+	brake = 1.0f - brake;
     brake = std::max(0.0f, std::min(1.0f, brake));
     throttle = std::max(0.0f, std::min(1.0f, throttle));
     target_steering_angle = std::max(-1.0f, std::min(1.0f, target_steering_angle));

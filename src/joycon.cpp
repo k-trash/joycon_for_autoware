@@ -16,6 +16,7 @@ public:
     joy_sub_ = this->create_subscription<sensor_msgs::msg::Joy>("/joy", 10, std::bind(&JoyConController::joyCallback, this, std::placeholders::_1));
     brake = 0.0;
     steering_angle = 0.0;
+    throttle = 0.0f;
     target_steering_angle = 0.0;
     timer_ = this->create_wall_timer(std::chrono::milliseconds(10), std::bind(&JoyConController::updateSteering, this));
   }
@@ -24,14 +25,17 @@ private:
   void joyCallback(const sensor_msgs::msg::Joy::SharedPtr msg)
   {
     // Assuming axes[1] is for brake and axes[0] is for steering
-    brake = 1.0 - msg->axes[4];
+    brake = msg->axes[2];
+    throttle = msg->axes[4];
     target_steering_angle = -msg->axes[0];
 
     brake = std::max(0.0f, std::min(1.0f, brake));
+    throttle = std::max(0.0f, std::min(1.0f, throttle));
     target_steering_angle = std::max(-1.0f, std::min(1.0f, target_steering_angle));
 
     // 小数点以下2位までに切り捨て
     brake = std::floor(brake * 100) / 100.0;
+    throttle = std::floor(throttle * 100) / 100.0;
     target_steering_angle = std::floor(target_steering_angle * 100) / 100.0;
   }
 
@@ -49,6 +53,7 @@ private:
 
     auto actuation_msg = tier4_vehicle_msgs::msg::ActuationCommandStamped();
     actuation_msg.actuation.brake_cmd = brake;
+    actuation_msg.actuation.accel_cmd = throttle;
 
     control_cmd_pub_->publish(control_msg);
     actuation_cmd_pub_->publish(actuation_msg);
@@ -63,6 +68,7 @@ private:
   float brake;
   float steering_angle;
   float target_steering_angle;
+  float throttle;
 };
 
 int main(int argc, char **argv)

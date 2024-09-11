@@ -18,7 +18,7 @@ public:
     steering_angle = 0.0;
     throttle = 0.0f;
     target_steering_angle = 0.0;
-    timer_ = this->create_wall_timer(std::chrono::milliseconds(10), std::bind(&JoyConController::updateSteering, this));
+    timer_ = this->create_wall_timer(std::chrono::milliseconds(30), std::bind(&JoyConController::updateSteering, this));
   }
 
 private:
@@ -29,8 +29,8 @@ private:
     //throttle = msg->axes[3];
     //target_steering_angle = -msg->axes[0];
 
-    brake = msg->axes[2];
-    throttle = msg->axes[4];
+    brake = msg->axes[3];
+    throttle = msg->axes[5];
     target_steering_angle = -msg->axes[0];
 
 	brake = 1.0f - brake;

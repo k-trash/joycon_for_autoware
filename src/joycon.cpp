@@ -57,13 +57,13 @@ private:
 
 			gate_pub->publish(gate_msg.data);
 		}
-		if(msg->button[1]){
+		if(msg->buttons[1]){
 			gate_msg.data = tier4_control_msgs::msg::GateMode::EXTERNAL;
 			
 			gate_pub->publish(gate_msg.data);
 		}
 
-		if(msg->button[4]){
+		if(msg->buttons[4]){
 			can_msg.header.stamp = this->get_clock()->now();
 			can_msg.id = INVERTER_ADDRESS;
 			can_msg.is_rtr = false;
@@ -83,7 +83,7 @@ private:
 			can_pub->publish(can_msg);
 		}
 
-		if(msg->button[5]){
+		if(msg->buttons[5]){
 			can_msg.header.stamp = this->get_clock()->now();
 			can_msg.id = INVERTER_ADDRESS;
 			can_msg.is_rtr = false;
@@ -103,7 +103,7 @@ private:
 			can_pub->publish(can_msg);
 		}
 
-		if(msg->button[6]){
+		if(msg->buttons[6]){
 			can_msg.header.stamp = this->get_clock()->now();
 			can_msg.id = INVERTER_ADDRESS;
 			can_msg.is_rtr = false;
@@ -123,7 +123,7 @@ private:
 			can_pub->publish(can_msg);
 		}
 
-		if(msg->button[4]){
+		if(msg->buttons[7]){
 			can_msg.header.stamp = this->get_clock()->now();
 			can_msg.id = INVERTER_ADDRESS;
 			can_msg.is_rtr = false;
@@ -157,7 +157,7 @@ private:
     control_msg.lateral.steering_tire_angle = steering_angle;
 
     auto actuation_msg = tier4_vehicle_msgs::msg::ActuationCommandStamped();
-	actuation_cmd.actuation.steer_cmd = steering_angle;
+	actuation_msg.actuation.steer_cmd = steering_angle;
     actuation_msg.actuation.brake_cmd = brake;
     actuation_msg.actuation.accel_cmd = throttle;
 
@@ -170,7 +170,7 @@ private:
   rclcpp::Publisher<autoware_auto_control_msgs::msg::AckermannControlCommand>::SharedPtr control_cmd_pub_;
   rclcpp::Publisher<tier4_vehicle_msgs::msg::ActuationCommandStamped>::SharedPtr actuation_cmd_pub_;
   rclcpp::Subscription<sensor_msgs::msg::Joy>::SharedPtr joy_sub_;
-  rclcpp::Publisher<tier4control_msgs::msg::GateMode>::SharedPtr gate_pub;
+  rclcpp::Publisher<tier4_control_msgs::msg::GateMode>::SharedPtr gate_pub;
   rclcpp::Publisher<can_msgs::msg::Frame>::SharedPtr can_pub;
   rclcpp::TimerBase::SharedPtr timer_;
 

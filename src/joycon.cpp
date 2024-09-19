@@ -140,7 +140,7 @@ private:
 			can_msg.data[4] = 0x00;
 			can_msg.data[5] = 0x00;
 			can_msg.data[6] = 0x00;
-			can_msg.data[7] = 0x44;
+			can_msg.data[7] = 0x43;
 
 			can_pub->publish(can_msg);
 		}

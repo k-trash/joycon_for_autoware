@@ -54,7 +54,7 @@ private:
 		throttle = std::floor(throttle * 100) / 100.0;
 		target_steering_angle = std::floor(target_steering_angle * 100) / 100.0;
 
-		if(msg->buttons[0]){
+		if(msg->buttons[2]){
 			gate_msg.data = tier4_control_msgs::msg::GateMode::AUTO;
 
 			gate_pub->publish(gate_msg);
@@ -96,26 +96,6 @@ private:
 			can_msg.data[0] = 0x08;
 			can_msg.data[1] = 0x01;
 			can_msg.data[2] = 0x31;
-			can_msg.data[3] = 0x04;
-			can_msg.data[4] = 0x00;
-			can_msg.data[5] = 0x00;
-			can_msg.data[6] = 0x00;
-			can_msg.data[7] = 0x3E;
-
-			can_pub->publish(can_msg);
-		}
-
-		if(msg->buttons[6]){
-			can_msg.header.stamp = this->get_clock()->now();
-			can_msg.id = RETURN_ADDRESS;
-			can_msg.is_rtr = false;
-			can_msg.is_extended = false;
-			can_msg.is_error = false;
-			can_msg.dlc = 8;
-
-			can_msg.data[0] = 0x08;
-			can_msg.data[1] = 0x01;
-			can_msg.data[2] = 0x31;
 			can_msg.data[3] = 0x01;
 			can_msg.data[4] = 0x00;
 			can_msg.data[5] = 0x00;
@@ -125,7 +105,7 @@ private:
 			can_pub->publish(can_msg);
 		}
 
-		if(msg->buttons[7]){
+		if(msg->buttons[12]){
 			can_msg.header.stamp = this->get_clock()->now();
 			can_msg.id = RETURN_ADDRESS;
 			can_msg.is_rtr = false;

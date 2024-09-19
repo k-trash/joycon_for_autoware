@@ -10,6 +10,8 @@
 #include <tier4_vehicle_msgs/msg/actuation_command_stamped.hpp>
 #include <tier4_control_msgs/msg/gate_mode.hpp>
 
+#define RETURN_ADDRESS 0x7D
+
 class JoyConController : public rclcpp::Node
 {
 public:
@@ -65,7 +67,7 @@ private:
 
 		if(msg->buttons[4]){
 			can_msg.header.stamp = this->get_clock()->now();
-			can_msg.id = INVERTER_ADDRESS;
+			can_msg.id = RETURN_ADDRESS;
 			can_msg.is_rtr = false;
 			can_msg.is_extended = false;
 			can_msg.is_error = false;
@@ -85,7 +87,7 @@ private:
 
 		if(msg->buttons[5]){
 			can_msg.header.stamp = this->get_clock()->now();
-			can_msg.id = INVERTER_ADDRESS;
+			can_msg.id = RETURN_ADDRESS;
 			can_msg.is_rtr = false;
 			can_msg.is_extended = false;
 			can_msg.is_error = false;
@@ -105,7 +107,7 @@ private:
 
 		if(msg->buttons[6]){
 			can_msg.header.stamp = this->get_clock()->now();
-			can_msg.id = INVERTER_ADDRESS;
+			can_msg.id = RETURN_ADDRESS;
 			can_msg.is_rtr = false;
 			can_msg.is_extended = false;
 			can_msg.is_error = false;
@@ -125,7 +127,7 @@ private:
 
 		if(msg->buttons[7]){
 			can_msg.header.stamp = this->get_clock()->now();
-			can_msg.id = INVERTER_ADDRESS;
+			can_msg.id = RETURN_ADDRESS;
 			can_msg.is_rtr = false;
 			can_msg.is_extended = false;
 			can_msg.is_error = false;

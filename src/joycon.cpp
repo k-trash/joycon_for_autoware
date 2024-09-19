@@ -57,6 +57,7 @@ private:
     control_msg.lateral.steering_tire_angle = steering_angle;
 
     auto actuation_msg = tier4_vehicle_msgs::msg::ActuationCommandStamped();
+	actuation_cmd.actuation.steer_cmd = steering_angle;
     actuation_msg.actuation.brake_cmd = brake;
     actuation_msg.actuation.accel_cmd = throttle;
 

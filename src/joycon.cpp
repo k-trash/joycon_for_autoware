@@ -20,7 +20,7 @@ public:
     control_cmd_pub_ = this->create_publisher<autoware_auto_control_msgs::msg::AckermannControlCommand>("/control/command/control_cmd", 10);
     actuation_cmd_pub_ = this->create_publisher<tier4_vehicle_msgs::msg::ActuationCommandStamped>("/control/command/actuation_cmd", 10);
     joy_sub_ = this->create_subscription<sensor_msgs::msg::Joy>("/joy", 10, std::bind(&JoyConController::joyCallback, this, std::placeholders::_1));
-	gate_pub = this->create_publisher<tier4_control_msgs::msg:GateMode>("/control/current_gatemode", 10);
+	gate_pub = this->create_publisher<tier4_control_msgs::msg::GateMode>("/control/current_gatemode", 10);
 	can_pub = this->create_publisher<can_msgs::msg::Frame>("from_can_bus", 10);
     timer_ = this->create_wall_timer(std::chrono::milliseconds(100), std::bind(&JoyConController::updateSteering, this));
 

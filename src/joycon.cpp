@@ -62,7 +62,7 @@ private:
 		if(msg->buttons[1]){
 			gate_msg.data = tier4_control_msgs::msg::GateMode::EXTERNAL;
 			
-			gate_pub->publish(gate_msg.data);
+			gate_pub->publish(gate_msg);
 		}
 
 		if(msg->buttons[4]){

@@ -18,7 +18,7 @@ public:
     steering_angle = 0.0;
     throttle = 0.0f;
     target_steering_angle = 0.0;
-    timer_ = this->create_wall_timer(std::chrono::milliseconds(30), std::bind(&JoyConController::updateSteering, this));
+    timer_ = this->create_wall_timer(std::chrono::milliseconds(100), std::bind(&JoyConController::updateSteering, this));
   }
 
 private:
@@ -35,7 +35,7 @@ private:
 
 	brake = 1.0f - brake;
     brake = std::max(0.0f, std::min(1.0f, brake));
-    throttle = std::max(0.0f, std::min(1.0f, throttle));
+    //throttle = std::max(0.0f, std::min(1.0f, throttle));
     target_steering_angle = std::max(-1.0f, std::min(1.0f, target_steering_angle));
 
     // 小数点以下2位までに切り捨て
@@ -47,7 +47,7 @@ private:
   void updateSteering()
   {
     // Smoothly interpolate towards the target steering angle
-    float steering_speed = 0.1; // Adjust this value to control the speed of steering changes
+    float steering_speed = 0.4; // Adjust this value to control the speed of steering changes
     steering_angle += (target_steering_angle - steering_angle) * steering_speed;
 
     // 小数点以下2位までに切り捨て

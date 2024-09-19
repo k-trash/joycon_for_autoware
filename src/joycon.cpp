@@ -10,7 +10,7 @@
 #include <tier4_vehicle_msgs/msg/actuation_command_stamped.hpp>
 #include <tier4_control_msgs/msg/gate_mode.hpp>
 
-#define RETURN_ADDRESS 0x7D
+#define RETURN_ADDRESS 0x7E9
 
 class JoyConController : public rclcpp::Node
 {

@@ -2,12 +2,16 @@
   <arg name="socketcan_device" default="can0"/>
   <arg name="output" default="/can_tx"/>
   <!-- Autoware to CAN TX ノードの設定 -->
-  <node pkg="can_tx_real" exec="autoware_to_cantx" name="autoware_to_cantx" output="screen" />
+  <node pkg="joycon_for_autoware" exec="joycon_controller" name="joycon_controller"/>
+
+  <node pkg="joy" exec="joy_node" name="joy_node"/>
 
   <!-- ros2_socketcanのlaunchファイルをインクルード -->
   <include file="$(find-pkg-share ros2_socketcan)/launch/socket_can_bridge.launch.xml">
     <arg name="interface" value="$(var socketcan_device)" />
     <arg name="to_can_bus_topic" value="$(var output)" />
   </include>
+
+  <include file="$(find-pkg-share mibot_interface)/launch/mibot_interface.launch.xml" output="screen"/>
 </launch>
 
